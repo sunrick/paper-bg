@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <link href="https://fonts.googleapis.com/css?family=Baloo+Thambi" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.10.2/paper-full.min.js"></script>
+  <link href="main.css" rel="stylesheet">
+  <script src="./main.js"></script>
+</head>
+<body>
+  <div id="hero">
+    <h1> wooooo </h1>
+    <canvas id="myCanvas"></canvas>
+  </div>
+
+<script type="text/paperscript" canvas="myCanvas" resize>
+// The amount of circles we want to make:
+var count = 150;
+var height = 100;
+var waveSpeed = 1;
+var horizontalSpeed = 5;
+var rotation = 0;
+
+// Create a symbol, which we will use to place instances of later:
+var path = new Path.Rectangle({
+  x: 0,
+  y: 0,
+  width: 20,
+  height: 20,
+  // radius: 10,
+  fillColor: 'white',
+  opacity: 0.1
+});
+
+var symbol = new Symbol(path);
+
+// Place the instances of the symbol:
+for (var i = 0; i < count; i++) {
+  // The center position is a random point in the view:
+  var center = Point.random() * view.size;
+  var placedSymbol = symbol.place(center);
+  placedSymbol.scale(i / count);
+}
+
+// The onFrame function is called up to 60 times a second:
+function onFrame(event) {
+  // Run through the active layer's children list and change
+  // the position of the placed symbols:
+  for (var i = 0; i < count; i++) {
+    var item = project.activeLayer.children[i];
+
+    // Move the item 1/20th of its width to the right. This way
+    // larger circles move faster than smaller circles:
+    item.position.x += horizontalSpeed / item.bounds.width;
+
+
+    var sinus = Math.sin(event.time * waveSpeed + i);
+
+    item.position.y = (sinus * (view.size.height / 2) + view.size.height / 2);
+
+    item.rotate(rotation);
+
+    // If the item has left the view on the right, move it back
+    // to the left:
+
+    if (horizontalSpeed > 0) {
+      if (item.bounds.left > view.size.width) {
+        item.position.x = -item.bounds.width;
+      }
+    } else if (horizontalSpeed < 0) {
+      if (item.bounds.right < 0) {
+        item.position.x = view.size.width;
+      }
+    }
+
+  }
+}
+
+function changeRotation() {
+  rotation = horizontalSpeed * 0.1;
+}
+
+function onKeyDown(event) {
+  if (event.key === 'right') {
+    horizontalSpeed += 3;
+    changeRotation();
+  } else if (event.key === 'left') {
+    horizontalSpeed -= 3;
+    changeRotation();
+  }
+}
+
+</script>
+</body>
+</html>
