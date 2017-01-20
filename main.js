@@ -1,6 +1,7 @@
 var Background = (function(){
 
   // intialize variables
+  var scope = "[data-id=background]";
   var count = 50;
   var height = 100;
   var waveSpeed = 1;
@@ -20,7 +21,9 @@ var Background = (function(){
     myPaper.view.onKeyDown = onKeyDownHandler;
     myPaper.view.onFrame = onFrameHandler;
     myPaper.view.pause();
-    $(document).on('click', "[data-id=play-toggle]", playToggleHandler);
+    $(document).on('click', scope + " " + "[data-id=play-toggle]", playToggleHandler);
+    $(document).on('click', scope + " " + "[data-id=left]", leftHandler)
+    $(document).on('click', scope + " " + "[data-id=right]", rightHandler)
     $(window).on('resize', resizeHandler);
   }
 
@@ -70,7 +73,6 @@ var Background = (function(){
     } else if (event.key === 'left') {
       horizontalSpeed -= 3;
     }
-    rotation = horizontalSpeed * 0.1;
   }
 
   function resizeHandler() {
@@ -88,6 +90,18 @@ var Background = (function(){
       $(this).text('Play');
     }
     paused = !paused;
+  }
+
+  function leftHandler() {
+    $(this).blur();
+    horizontalSpeed -= 10;
+    rotation = horizontalSpeed * 0.1;
+  }
+
+  function rightHandler() {
+    $(this).blur();
+    horizontalSpeed += 10;
+    rotation = horizontalSpeed * 0.1;
   }
 
   return {
