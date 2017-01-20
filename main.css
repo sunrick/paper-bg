@@ -31,7 +31,6 @@ canvas[resize] {
   }
 }
 
-
 .canvas-hero {
   position: relative;
   height: 150px;
@@ -40,8 +39,6 @@ canvas[resize] {
   text-align: center;
   margin-bottom: 20px;
 }
-
-
 
 h1 {
   color: white;
