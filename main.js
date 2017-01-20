@@ -1,7 +1,7 @@
 var Background = (function(){
 
   // intialize variables
-  var count = 100;
+  var count = 50;
   var height = 100;
   var waveSpeed = 1;
   var horizontalSpeed = 10;
@@ -13,7 +13,10 @@ var Background = (function(){
 
   function init() {
     addSymbols();
+    myPaper.view.onKeyDown = onKeyDownHandler;
+    myPaper.view.onFrame = onFrameHandler;
     myPaper.view.pause();
+    $(document).on('click', "[data-id=play-toggle]", playToggleHandler);
   }
 
   function addSymbols() {
@@ -33,8 +36,8 @@ var Background = (function(){
     }
   }
 
-  myPaper.view.onFrame = function(event) {
-    for (var i = 0; i < count; i++) {
+  function onFrameHandler(event) {
+     for (var i = 0; i < count; i++) {
 
       var item = myPaper.project.activeLayer.children[i];
       var sinus = Math.sin(event.time * waveSpeed + i);
@@ -56,7 +59,7 @@ var Background = (function(){
     }
   }
 
-  myPaper.view.onKeyDown = function(event) {
+  function onKeyDownHandler(event) {
     if (event.key === 'right') {
       horizontalSpeed += 3;
     } else if (event.key === 'left') {
@@ -65,7 +68,7 @@ var Background = (function(){
     rotation = horizontalSpeed * 0.1;
   }
 
-  $(document).on('click', "[data-id=play-toggle]", function(e){
+  function playToggleHandler() {
     $(this).blur();
     if(paused) {
       myPaper.view.play();
@@ -75,7 +78,7 @@ var Background = (function(){
       $(this).text('Play');
     }
     paused = !paused;
-  });
+  }
 
   return {
     init: init
