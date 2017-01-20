@@ -9,14 +9,19 @@ var Background = (function(){
   var paused = true;
   var canvas = document.getElementById('dog');
   var myPaper = new paper.PaperScope();
+  var viewWidth;
+  var viewHeight;
   myPaper.setup(canvas);
 
   function init() {
     addSymbols();
+    viewWidth = myPaper.view.size.width;
+    viewHeight = myPaper.view.size.height;
     myPaper.view.onKeyDown = onKeyDownHandler;
     myPaper.view.onFrame = onFrameHandler;
     myPaper.view.pause();
     $(document).on('click', "[data-id=play-toggle]", playToggleHandler);
+    $(window).on('resize', resizeHandler);
   }
 
   function addSymbols() {
@@ -43,16 +48,16 @@ var Background = (function(){
       var sinus = Math.sin(event.time * waveSpeed + i);
 
       item.position.x += (horizontalSpeed / item.bounds.width);
-      item.position.y = (sinus * (myPaper.view.size.height / 2) + myPaper.view.size.height / 2);
+      item.position.y = (sinus * viewHeight / 2) + (viewHeight / 2);
       item.rotate(rotation);
 
       if (horizontalSpeed > 0) {
-        if (item.bounds.left > myPaper.view.size.width) {
+        if (item.bounds.left > viewWidth) {
           item.position.x = -item.bounds.width;
         }
       } else if (horizontalSpeed < 0) {
         if (item.bounds.right < 0) {
-          item.position.x = myPaper.view.size.width;
+          item.position.x = viewWidth;
         }
       }
 
@@ -66,6 +71,11 @@ var Background = (function(){
       horizontalSpeed -= 3;
     }
     rotation = horizontalSpeed * 0.1;
+  }
+
+  function resizeHandler() {
+    viewWidth = myPaper.view.size.width;
+    viewHeight = myPaper.view.size.height;
   }
 
   function playToggleHandler() {
