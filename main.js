@@ -1,8 +1,9 @@
-var count = 150;
+var count = 100;
 var height = 100;
 var waveSpeed = 1;
 var horizontalSpeed = 10;
 var rotation = 1;
+var paused = true;
 
 // Get a reference to the canvas object
 var canvas = document.getElementById('dog');
@@ -53,7 +54,7 @@ myPaper.view.onFrame = function(event) {
       }
     } else if (horizontalSpeed < 0) {
       if (item.bounds.right < 0) {
-        item.position.x = view.size.width;
+        item.position.x = myPaper.view.size.width;
       }
     }
 
@@ -75,6 +76,19 @@ myPaper.view.onKeyDown = function(event) {
 }
 
 // Draw the view now:
-myPaper.view.draw();
+myPaper.view.pause();
+
+$(document).on('click', "[data-id=play-toggle]", function(e){
+  $(this).blur();
+  if(paused) {
+    myPaper.view.play();
+    $(this).text('Pause');
+    paused = false;
+  } else {
+    myPaper.view.pause();
+    $(this).text('Play');
+    paused = true;
+  }
+});
 
 

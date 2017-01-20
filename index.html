@@ -5,12 +5,31 @@
   <title></title>
   <link href="https://fonts.googleapis.com/css?family=Baloo+Thambi" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.10.2/paper-full.min.js"></script>
-  <link href="main.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.3.1/css/bulma.css" />
+  <link href="main.css" rel="stylesheet"/>
 </head>
 <body>
-  <div class="hero">
-    <canvas id="dog"></canvas>
-  </div>
+  <nav class="nav">
+    <div class="container">
+      <a href="/" class="nav-item is-brand">
+        paper.js fun
+      </a>
+    </div>
+  </nav>
+  <section class="section">
+    <div class="container">
+      <div class="columns">
+        <div class="column is-6">
+          <p class="title"> Cute moving background </p>
+          <section class="canvas-hero box">
+            <canvas id="dog" resize></canvas>
+          </section>
+          <button data-id="play-toggle" class="button"> Play </button>
+        </div>
+      </div>
+    </div>
+  </section>
   <script src="./main.js"></script>
 </body>
 </html>
