@@ -2,7 +2,7 @@ var Background = (function(){
 
   // intialize variables
   var scope = "[data-id=background]";
-  var count = 50;
+  var count = 100;
   var height = 100;
   var waveSpeed = 1;
   var horizontalSpeed = 10;
