@@ -12,8 +12,6 @@ Animations.explosion = (function(){
   var canvas = document.getElementById('explosion');
   var myPaper = new paper.PaperScope();
   myPaper.setup(canvas);
-  viewWidth = myPaper.view.size.width;
-  viewHeight = myPaper.view.size.height;
 
   ////////
   //code//
