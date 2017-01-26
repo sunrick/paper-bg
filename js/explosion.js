@@ -1,7 +1,7 @@
 Animations.explosion = (function(){
 
   // scope
-   var scope = "[data-id=explosion]";
+  var scope = "[data-id=explosion]";
 
   // setup
   var colors = ['red', 'orange', 'yellow'];
