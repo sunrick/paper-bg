@@ -6,6 +6,7 @@
   <link href="https://fonts.googleapis.com/css?family=Baloo+Thambi" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.10.2/paper-full.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/16.3.5/Tween.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.3.1/css/bulma.css" />
   <link href="main.css" rel="stylesheet"/>
 </head>
@@ -18,22 +19,34 @@
     </div>
   </nav>
 
-  <section data-id="background" class="section">
+  <section class="section">
     <div class="container">
       <div class="columns">
-        <div class="column is-6">
+
+        <div data-id="background" class="column is-6">
           <p class="title"> Cute moving background </p>
-          <section class="canvas-hero box">
-            <canvas id="dog" resize></canvas>
+          <section class="canvas-hero has-background box">
+            <canvas id="background" resize></canvas>
           </section>
           <button data-id="left" class="button"> <- </button>
           <button data-id="play-toggle" class="button"> Play </button>
           <button data-id="right" class="button"> -> </button>
         </div>
+
+        <div data-id="explosion" class="column is-6">
+          <p class="title"> Explosion </p>
+          <section class="canvas-hero box">
+            <canvas id="explosion" resize></canvas>
+          </section>
+        </div>
+
       </div>
     </div>
   </section>
 
+
   <script src="./main.js"></script>
+  <script src="./js/background.js"></script>
+  <script src="./js/explosion.js"></script>
 </body>
 </html>
