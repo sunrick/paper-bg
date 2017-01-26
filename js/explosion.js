@@ -41,8 +41,7 @@ Animations.explosion = (function(){
           path.position.x = position.x;
           path.position.y = position.y;
         }
-      )
-      .start();
+      ).start();
   }
 
   function pickColor() {
