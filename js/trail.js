@@ -8,17 +8,17 @@ Animations.trail = (function(){
 
   // paperjs
   var canvas = document.getElementById('trail');
-  var myPaper = new paper.PaperScope();
-  myPaper.setup(canvas);
+  // var myPaper = Papers[2];
+  Papers[2].setup(canvas);
 
   ////////
   //code//
   ////////
 
-  myPaper.view.onMouseMove = function(event) {
+  Papers[2].view.onMouseMove = function(event) {
     var vector = event.point.subtract(lastPoint);
     if (vector.length > 10) {
-      var path = new myPaper.Path.Circle({
+      var path = new Papers[2].Path.Circle({
         center: event.point,
         radius: 3,
         fillColor: 'red'
@@ -37,7 +37,9 @@ Animations.trail = (function(){
         function() {
           path.opacity = state.opacity;
         }
-      ).start();
+      ).onComplete(function(){
+        path.remove();
+      }).start();
   }
 
 })();

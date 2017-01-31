@@ -9,18 +9,17 @@ Animations.background = (function(){
   var rotation = 1;
   var paused = true;
   var canvas = document.getElementById('background');
-  var myPaper = new paper.PaperScope();
   var viewWidth;
   var viewHeight;
-  myPaper.setup(canvas);
+  Papers[0].setup(canvas);
 
   function init() {
     addSymbols();
-    viewWidth = myPaper.view.size.width;
-    viewHeight = myPaper.view.size.height;
-    myPaper.view.onKeyDown = onKeyDownHandler;
-    myPaper.view.onFrame = onFrameHandler;
-    myPaper.view.pause();
+    viewWidth = Papers[0].view.size.width;
+    viewHeight = Papers[0].view.size.height;
+    Papers[0].view.onKeyDown = onKeyDownHandler;
+    Papers[0].view.onFrame = onFrameHandler;
+    Papers[0].view.pause();
     $(document).on('click', scope + " " + "[data-id=play-toggle]", playToggleHandler);
     $(document).on('click', scope + " " + "[data-id=left]", leftHandler)
     $(document).on('click', scope + " " + "[data-id=right]", rightHandler)
@@ -28,7 +27,7 @@ Animations.background = (function(){
   }
 
   function addSymbols() {
-    var path = new myPaper.Path.Rectangle({
+    var path = new Papers[0].Path.Rectangle({
       x: 0,
       y: 0,
       width: 10,
@@ -36,9 +35,9 @@ Animations.background = (function(){
       fillColor: 'white',
       opacity: 0.1
     });
-    var symbol = new myPaper.Symbol(path);
+    var symbol = new Papers[0].Symbol(path);
     for (var i = 0; i < count; i++) {
-      var center = myPaper.Point.random().multiply(myPaper.view.size);
+      var center = Papers[0].Point.random().multiply(Papers[0].view.size);
       var placedSymbol = symbol.place(center);
       placedSymbol.scale(i / count);
     }
@@ -47,7 +46,7 @@ Animations.background = (function(){
   function onFrameHandler(event) {
      for (var i = 0; i < count; i++) {
 
-      var item = myPaper.project.activeLayer.children[i];
+      var item = Papers[0].project.activeLayer.children[i];
       var sinus = Math.sin(event.time * waveSpeed + i);
 
       item.position.x += (horizontalSpeed / item.bounds.width);
@@ -76,17 +75,17 @@ Animations.background = (function(){
   }
 
   function resizeHandler() {
-    viewWidth = myPaper.view.size.width;
-    viewHeight = myPaper.view.size.height;
+    viewWidth = Papers[0].view.size.width;
+    viewHeight = Papers[0].view.size.height;
   }
 
   function playToggleHandler() {
     $(this).blur();
     if(paused) {
-      myPaper.view.play();
+      Papers[0].view.play();
       $(this).text('Pause');
     } else {
-      myPaper.view.pause();
+      Papers[0].view.pause();
       $(this).text('Play');
     }
     paused = !paused;

@@ -10,17 +10,16 @@ Animations.explosion = (function(){
 
   // paperjs
   var canvas = document.getElementById('explosion');
-  var myPaper = new paper.PaperScope();
-  myPaper.setup(canvas);
+  Papers[1].setup(canvas);
 
   ////////
   //code//
   ////////
 
-  myPaper.view.onMouseDown = function(event) {
+  Papers[1].view.onMouseDown = function(event) {
     color = pickColor();
     for (var i = 0; i < count; i++) {
-      var path = new myPaper.Path.Circle({
+      var path = new Papers[1].Path.Circle({
         center: event.point,
         radius: 3,
         fillColor: color,
@@ -31,7 +30,7 @@ Animations.explosion = (function(){
   }
 
   function animation(path) {
-    var randomPoint = myPaper.Point.random().multiply(myPaper.view.size);
+    var randomPoint = Papers[1].Point.random().multiply(Papers[1].view.size);
     var position = { x: path.position.x, y: path.position.y };
     new TWEEN.Tween(position)
       .to({ x: randomPoint.x, y: randomPoint.y }, 300)
